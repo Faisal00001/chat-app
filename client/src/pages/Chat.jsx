@@ -1,8 +1,10 @@
+import { useSelector } from "react-redux";
 
 const Chat = () => {
+    const user = useSelector((state) => state.user)
     return (
         <div>
-            Chat
+            <h3>Hello</h3>
         </div>
     );
 };
