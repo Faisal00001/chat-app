@@ -1,11 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-const useAxiosPublic = axios.create({
-    baseURL: 'http://localhost:5000', // Replace with your base URL
-    // timeout: 10000, // Optional: Set a timeout (in milliseconds)
-    headers: {
-        'Content-Type': 'application/json', // Optional: Set default headers
-    },
-});
+const axiosPublic = axios.create({
+    // baseURL: 'http://127.0.0.1:8000/api'
+    baseURL: 'http://localhost:5000/api'
+})
+
+const useAxiosPublic = () => {
+    return axiosPublic;
+};
 
 export default useAxiosPublic;
+
