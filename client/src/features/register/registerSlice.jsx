@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
-import axios from 'axios';
+
 
 const axiosPublic = useAxiosPublic();
 
@@ -9,8 +9,8 @@ export const registerUser = createAsyncThunk(
     'users/register',
     async (_, { getState, rejectWithValue }) => {
         try {
-            const registerInfo = getState().register.registerInfo;// Adjusted path
-
+            const registerInfo = getState().register.registerInfo;// Adjusted path 
+            console.log(registerInfo)
             const response = await axiosPublic.post('/users/register', registerInfo);
             return response.data; // Assuming the API returns the newly created user data
         } catch (error) {
@@ -37,6 +37,7 @@ export const registerSlice = createSlice({
             state.registerInfo = { ...state.registerInfo, ...action.payload };
         },
         clearRegisterInfo: (state) => {
+
             state.registerInfo = { name: "", email: "", password: "" };
         }
     },

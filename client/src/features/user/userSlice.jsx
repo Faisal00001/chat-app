@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+// Retrieve user data from localStorage outside the component
 const userFromStorage = JSON.parse(localStorage.getItem("User"));
 export const userSlice = createSlice({
     name: 'user',
@@ -6,17 +7,18 @@ export const userSlice = createSlice({
         user: userFromStorage || null,
     },
     reducers: {
-        setUser: (state, action) => action.payload
-        // decrement: state => {
-        //     state.value -= 1
-        // },
-        // incrementByAmount: (state, action) => {
-        //     state.value += action.payload
-        // }
+        setUser: (state, action) => {
+            state.user = action.payload;
+            localStorage.setItem("User", JSON.stringify(action.payload));
+        },
+        logout: (state) => {
+            state.user = null;
+            localStorage.removeItem("User"); // Clear localStorage on logout
+        }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { setUser } = userSlice.actions
+export const { setUser, logout } = userSlice.actions
 
 export default userSlice.reducer

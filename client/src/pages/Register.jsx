@@ -1,10 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, updateRegisterInfo } from "../features/register/registerSlice";
+import { clearRegisterInfo, registerUser, updateRegisterInfo } from "../features/register/registerSlice";
 import { setUser } from "../features/user/userSlice";
 import toast from "react-hot-toast";
-
+import { FaEyeSlash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+import { useState } from "react";
 
 const Register = () => {
+    const [showPassword, setShowPassword] = useState(false)
     const user = useSelector((state) => state
         .user)
     const registerInfo = useSelector((state) => state.register.registerInfo)
@@ -24,16 +27,14 @@ const Register = () => {
 
         if (action.type === registerUser.fulfilled.type) {
             if (action.payload) {
-                localStorage.setItem("User", JSON.stringify(action.payload));
-                // Dispatch setUser action if registration was successful
                 dispatch(setUser(action.payload));
-                toast.success("User Register Successfully")
+                toast.success("User Registered Successfully");
+                dispatch(clearRegisterInfo())
             }
         } else if (action.type === registerUser.rejected.type) {
-            // Handle the error case (e.g., show an error message)
             console.error('Registration failed:', action.error.message);
         }
-    };
+    }
     return (
         <div>
 
@@ -46,10 +47,19 @@ const Register = () => {
                 <div className="mb-5">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
                     <input name="email" value={registerInfo.email} onChange={handleInputChange} type="email" className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-black" placeholder="Enter your email" required />
+
                 </div>
-                <div className="mb-5">
+                <div className="mb-5 relative">
                     <label htmlFor="password" className="block mb-2 text-sm font-medium">Your password</label>
-                    <input name="password" value={registerInfo.password} onChange={handleInputChange} type="password" className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5  text-black" required />
+                    <input name="password" value={registerInfo.password} onChange={handleInputChange} type={`${showPassword ? 'text' : 'password'}`} className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5  text-black" required />
+                    {
+                        showPassword ? <div className="absolute top-10 right-5 cursor-pointer">
+                            <FaEye onClick={() => setShowPassword(false)} className="text-xl text-black" />:
+                        </div> : <div className="absolute top-10 right-5 cursor-pointer ">
+                            <FaEyeSlash onClick={() => setShowPassword(true)} className="text-xl text-black" />
+                        </div>
+                    }
+
                 </div>
 
 
