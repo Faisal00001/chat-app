@@ -15,7 +15,7 @@ const Navbar = () => {
     return (
         <div className="h-20 bg-black py-2 mb-5">
             <div className="container mx-auto">
-                <div className="flex justify-evenly items-center mt-2">
+                <div className="flex justify-between items-center mt-2">
                     <div>
                         <Link to={'/'}>
                             <h2 className="text-4xl">Chat App</h2>
