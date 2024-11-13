@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-    const user = JSON.parse(localStorage.getItem('User'))
-    if (user) {
-        return children
+    const userInfo = useSelector((state) => state.user);
+    const user = userInfo?.user
+
+    if (!user) {
+        // Redirect to login if user is not found
+        return <Navigate to="/login" replace />;
     }
-    return <Navigate to={`/login`} replace></Navigate>
+
+    // If user exists, render the children components
+    return children;
 };
 
 export default PrivateRoute;

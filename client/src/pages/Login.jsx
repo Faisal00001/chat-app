@@ -43,11 +43,11 @@ const Login = () => {
             <form className="max-w-md mx-auto pt-20" onSubmit={handleLogin}>
                 <div className="mb-5">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
-                    <input type="email" name="email" value={loginInfo.email} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5" placeholder="Enter your email" required />
+                    <input type="email" name="email" value={loginInfo.email} onChange={handleInputChange} className="bg-gray-50 text-black border border-gray-300 text-sm rounded-lg block w-full p-2.5" placeholder="Enter your email" required />
                 </div>
                 <div className="mb-5 relative">
                     <label htmlFor="password" className="block mb-2 text-sm font-medium">Your password</label>
-                    <input type={`${showPassword ? 'text' : 'password'}`} name="password" value={loginInfo.password} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5" required />
+                    <input type={`${showPassword ? 'text' : 'password'}`} name="password" value={loginInfo.password} onChange={handleInputChange} className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5 text-black" required />
                     {
                         showPassword ? <div className="absolute top-10 right-5 cursor-pointer">
                             <FaEye onClick={() => setShowPassword(false)} className="text-xl text-black" />:
